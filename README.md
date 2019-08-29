@@ -18,8 +18,8 @@ Synchronization primitives like Semaphore, Mutex has been incorporated.
 
 **Team**
 
-1) Abishek KR @Firefox0398
-2) Abishek R @abishek27
-3) Shubham Saha @Helinskii
-4) Raj Kumar Bhagat @Rajk0520
-5) Venkatesh TK @VenkateshTK
+1) Abishek KR ![alt text](https://github.com/Firefox0398)
+2) Abishek R  ![alt text](https://github.com/abishek27)
+3) Shubham Saha ![alt text](https://github.com/Helinskii)
+4) Raj Kumar Bhagat ![alt text](https://github.com/Rajk0520)
+5) Venkatesh TK ![alt text](https://github.com/VenkateshTK)

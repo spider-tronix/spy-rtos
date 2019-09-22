@@ -439,6 +439,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>User Functions</GroupName>
+          <Files>
+            <File>
+              <FileName>user_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User Functions\user_func.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User Functions\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>

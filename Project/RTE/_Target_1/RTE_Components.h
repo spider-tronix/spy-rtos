@@ -1,6 +1,6 @@
 
 /*
- * Auto generated Run-Time-Environment Component Configuration File
+ * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
  * Project: 'RTOS_V1' 
@@ -15,6 +15,7 @@
  * Define the Device Header File: 
  */
 #define CMSIS_device_header "TM4C123.h"
+
 
 
 #endif /* RTE_COMPONENTS_H */

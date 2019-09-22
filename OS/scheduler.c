@@ -3,9 +3,15 @@
 #include <OS/os.h>
 void scheduler()
 {
-	start_critical();
-	new_high_tcb=ready_queue_head;
-	delete_head(&ready_queue_head);
+	os_start_critical();
+	uint8_t high_priority;
+	high_priority= os_get_highest_priority(*os_ready_list_point);
+	new_high_tcb=os_tcb_lut[high_priority];
+	if(current_tcb == new_high_tcb)
+	{
+		os_end_critical();
+		return;
+	}
 	context_switch();
-	end_critical();
+	os_end_critical();
 }

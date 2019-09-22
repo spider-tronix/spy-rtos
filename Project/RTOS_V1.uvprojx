@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>E:\RTOS_V1\include</IncludePath>
+              <IncludePath>D:\RTOS_v2\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -435,6 +435,11 @@
               <FileName>context_switch.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\processor_Specific\context_switch.s</FilePath>
+            </File>
+            <File>
+              <FileName>helper.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\helper.s</FilePath>
             </File>
           </Files>
         </Group>

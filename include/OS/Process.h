@@ -4,6 +4,14 @@
 /* 
     This header file is compiler dependent and is used to obtain fixed size datatypes
 */
+#define NULL 0
+#define READY 0
+#define WAITING 1
+#define RUNNING 2
+#define BLOCKED 3
+extern uint32_t ready_val;
+extern uint32_t *os_ready_list_point;
+extern struct tcb* os_tcb_lut[32];
 struct tcb
 {
 	uint32_t *stack_base;

@@ -1,6 +1,15 @@
 #include <OS/Process.h>
 #include <OS/Queues.h>
 #include <OS/os.h>
+
+uint32_t ready_val;
+uint32_t *os_ready_list_point;
+struct tcb* os_tcb_lut[32];
+inline void os_add_ready_list(struct tcb *temp_tcb)
+{
+	*(os_ready_list_point) |= (1<<(31-temp_tcb->priority));
+   os_tcb_lut[temp_tcb->priority] = temp_tcb;	
+}
 void os_task_create(struct tcb *temp_tcb,void(*fun_ptr)(void *args),void *args,uint32_t *stack_base,uint32_t stack_size,uint32_t priority)
 {
 	temp_tcb->stack_base = stack_base;
@@ -15,8 +24,15 @@ void os_task_create(struct tcb *temp_tcb,void(*fun_ptr)(void *args),void *args,u
 	temp_tcb->del_req = 0;
 	os_stack_init(&temp_tcb->stack_base,fun_ptr,args);
 	os_start_critical();
-	
-	os_end_critical();
+	os_add_ready_list(temp_tcb);
+	if(sched_state = RUNNING)
+	{
+		os_scheduler();
+	}
+	else
+	{
+	  os_end_critical();
+	}
 }
 void os_stack_init(uint32_t **stack_base,void(*fun_ptr)(void *args),void *args)
 {

@@ -8,6 +8,41 @@ void os_sem_create(struct semaphore *sem,uint16_t count)
 	sem->sem_ptr_tail = NULL;
 }
 
+void os_sem_wait(struct semaphore *sem)
+{
+	os_start_critical();
+	sem->sem_count--;
+	if(sem->sem_count < 0)
+	{
+		os_block(sem);
+	}
+	os_end_critical();
+	os_scheduler();
+}
+
+void os_sem_signal(struct semaphore *sem)
+{
+	os_start_critical();
+	sem->sem_count++;
+	if(sem->sem_count <= 0)
+	{
+		os_release(sem);
+	}
+	os_end_critical();
+	os_scheduler();
+}
+
+void os_block(struct semaphore *sem)
+{
+	struct sem_data sem_block;
+	sem_block.tcb_ptr = current_tcb;
+	sem_block.next = NULL;
+	sem_block.prev = NULL;
+	os_add_semqueue(sem,&sem_block);
+	os_remove_ready_list(current_tcb);
+	current_tcb->task_state = WAITING;
+}
+
 void os_release(struct semaphore *sem)
 {
 	os_add_ready_list(os_delete_semqueue(sem)->tcb_ptr);

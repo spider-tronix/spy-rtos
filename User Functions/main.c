@@ -1,6 +1,6 @@
-#include <Process.h>
-#include <os.h>
-#include <Queues.h>
+#include <OS/tasks.h>
+#include <OS/os.h>
+#include <OS/Queues.h>
 #include <gpio.h>
 uint32_t stack1[200];
 uint32_t stack20[200];

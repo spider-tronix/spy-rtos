@@ -1,5 +1,4 @@
 #include <OS/tasks.h>
-#include <OS/Queues.h>
 #include <OS/os.h>
 void os_scheduler()
 {
@@ -12,6 +11,11 @@ void os_scheduler()
 		os_end_critical();
 		return;
 	}
+	else if(current_tcb->task_state == RUNNING)
+	{
+		current_tcb->task_state = READY;
+	}
+	new_high_tcb->task_state = RUNNING;
 	os_context_switch();
 	os_end_critical();
 }

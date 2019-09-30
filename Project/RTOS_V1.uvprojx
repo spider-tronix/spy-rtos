@@ -387,30 +387,15 @@
               <FilePath>..\include\OS\os.h</FilePath>
             </File>
             <File>
-              <FileName>Process.h</FileName>
+              <FileName>tasks.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\include\OS\Process.h</FilePath>
-            </File>
-            <File>
-              <FileName>Queues.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\OS\Queues.h</FilePath>
+              <FilePath>..\include\OS\tasks.h</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>OS</GroupName>
           <Files>
-            <File>
-              <FileName>process.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\OS\process.c</FilePath>
-            </File>
-            <File>
-              <FileName>Queues.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\OS\Queues.c</FilePath>
-            </File>
             <File>
               <FileName>scheduler.c</FileName>
               <FileType>1</FileType>
@@ -421,25 +406,45 @@
               <FileType>1</FileType>
               <FilePath>..\OS\os.c</FilePath>
             </File>
+            <File>
+              <FileName>tasks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\OS\tasks.c</FilePath>
+            </File>
+            <File>
+              <FileName>semaphore.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\OS\semaphore.c</FilePath>
+            </File>
+            <File>
+              <FileName>queues.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\OS\queues.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>processor_specific</GroupName>
           <Files>
             <File>
-              <FileName>synchronization_asm.s</FileName>
+              <FileName>helper.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\processor_Specific\synchronization_asm.s</FilePath>
+              <FilePath>..\processor_Specific\Assembly\helper.s</FilePath>
             </File>
             <File>
               <FileName>context_switch.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\processor_Specific\context_switch.s</FilePath>
+              <FilePath>..\processor_Specific\Assembly\context_switch.s</FilePath>
             </File>
             <File>
-              <FileName>helper.s</FileName>
+              <FileName>synchronization_asm.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\helper.s</FilePath>
+              <FilePath>..\processor_Specific\Assembly\synchronization_asm.s</FilePath>
+            </File>
+            <File>
+              <FileName>cpu_C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\processor_Specific\c_files\cpu_C.c</FilePath>
             </File>
           </Files>
         </Group>

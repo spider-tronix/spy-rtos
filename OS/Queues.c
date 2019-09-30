@@ -1,67 +1,54 @@
-#include <OS/Queues.h>
 #include <OS/os.h>
-struct tcb *ready_queue_head=NULL;
-void add_ready_queue(struct tcb *temp_pt)
+void os_add_semqueue(struct semaphore *head,struct sem_data *temp_sem)
 {
-	struct tcb *temp=ready_queue_head;
-	if(temp_pt->priority < current_tcb->priority && start_flag==1)
+	struct sem_data *temp = head->sem_ptr_head;
+	if(head->sem_ptr_head==NULL)
 	{
-		new_high_tcb=temp_pt;
-		context_switch();
-		end_critical();
-	}
-	else if(temp==NULL)
-	{
-		ready_queue_head=temp_pt;
-	}
-	else if(temp->priority > temp_pt->priority)
-	{
-		temp_pt->next=temp;
-		temp->prev=temp_pt;
-		temp_pt->prev=NULL;
-		ready_queue_head=temp_pt;
+		head->sem_ptr_head=temp_sem;
+		head->sem_ptr_tail=temp_sem;
 	}
 	else
 	{
-		while((temp->priority < temp_pt->priority) && temp->next!=NULL )
+		while(temp!= NULL)
 		{
-			temp=temp->next;
+			if(temp_sem->tcb_ptr->priority <= temp->tcb_ptr->priority)
+			{
+				break;
+			}
+			temp = temp->next;
+		}	
+		if(temp == NULL)
+		{
+			head->sem_ptr_tail->next = temp_sem;
+			temp_sem->prev = head->sem_ptr_tail;
+			head->sem_ptr_tail = temp_sem;
 		}
-		if(temp->priority < temp_pt->priority && temp->next==NULL)
+		else if(temp->prev == NULL)
 		{
-			temp_pt->next=NULL;
-			temp->next=temp_pt;
-			temp_pt->prev=temp;
+			head->sem_ptr_head->prev = temp_sem;
+			temp_sem->next = head->sem_ptr_head;
+			head->sem_ptr_head = temp_sem;
 		}
 		else
 		{
-		   temp->prev->next=temp_pt;
-		   temp_pt->next=temp;
-		   temp_pt->prev=temp->prev;
+			temp->prev->next = temp_sem;
+			temp_sem->prev = temp->prev;
+			temp->prev = temp_sem;
+			temp_sem->next = temp;
 		}
 	}
 }
-void add_queue(struct tcb **head,struct tcb *temp_pt)
+struct sem_data* os_delete_semqueue(struct semaphore *sem)
 {
-	if((*head)==NULL)
+	struct sem_data *temp = sem->sem_ptr_head;
+	if(sem->sem_ptr_head==NULL)
 	{
-		*head=temp_pt;
+		return NULL;
 	}
 	else
 	{
-	   temp_pt->next=*head;
-	   (*head)->prev=temp_pt;
-	   *head=temp_pt;
+		temp->next->prev =NULL;
+		sem->sem_ptr_head = temp->next;
+		return temp;
 	}
-}
-void delete_head(struct tcb **head)
-{
-	if((*head)==NULL)
-	{
-		return;
-	}
-	struct tcb *temp=(*head)->next;
-	(*head)->next->prev=NULL;
-	(*head)->next=NULL;
-	(*head)=temp;
 }

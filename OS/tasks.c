@@ -1,5 +1,4 @@
 #include <OS/tasks.h>
-#include <OS/Queues.h>
 #include <OS/os.h>
 
 uint32_t os_ready_list[2];
@@ -22,6 +21,7 @@ void os_task_create(struct tcb *temp_tcb,void(*fun_ptr)(void *args),void *args,u
 	if(os_sched_state == RUNNING)
 	{
 		os_scheduler();
+		os_end_critical();
 	}
 	else
 	{

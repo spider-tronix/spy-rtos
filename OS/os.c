@@ -40,7 +40,7 @@ void os_add_ready_list(struct tcb *temp_tcb)
 	}
 }
 
-void os_delete_ready_list(struct tcb *temp_tcb)
+void os_remove_ready_list(struct tcb *temp_tcb)
 {
 	if(temp_tcb->priority <=31)
 	{
@@ -65,4 +65,3 @@ uint8_t os_get_highest_priority()
 		return os_leading_zeros(*(os_ready_list+ 1));
 	}
 }
-	

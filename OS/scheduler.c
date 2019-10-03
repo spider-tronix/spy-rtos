@@ -3,6 +3,7 @@
 void os_scheduler()
 {
 	os_start_critical();
+	os_remove_ready_list(current_tcb);
 	uint8_t high_priority;
 	high_priority= os_get_highest_priority();
 	new_high_tcb=os_tcb_lut[high_priority];

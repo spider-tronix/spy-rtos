@@ -1,8 +1,7 @@
-#include <gpio.h>
-#include <os.h>
-#include <Process.h>
+#include <OS/os.h>
+#include <OS/tasks.h>
 
-void gpio_init()
+/*void gpio_init()
 {
 	
 	volatile uint32_t ui32Loop;
@@ -21,7 +20,7 @@ void gpio_init()
 //  NVIC_INT_CTRL_R = 0x10000000;
 	
 	
-}
+}*/
 
 
 void user1(void)

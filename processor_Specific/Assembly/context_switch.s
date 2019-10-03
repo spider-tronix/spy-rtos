@@ -32,8 +32,8 @@ os_first_task PROC
 	ENDP
 
 		
-context_switch PROC
-	EXPORT context_switch
+os_context_switch PROC
+	EXPORT os_context_switch
     LDR     R0, =0xE000ED04
     LDR     R1, =0x10000000   
     STR     R1, [R0]
@@ -60,6 +60,6 @@ PendSV_Handler PROC
     MSR     PSP, R0                                             ; Load PSP with new process SP
     CPSIE   I
     BX      LR 
-    ENDP	
+    ENDP
+    NOP		
     END
-

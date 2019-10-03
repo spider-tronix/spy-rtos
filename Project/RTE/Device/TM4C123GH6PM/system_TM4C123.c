@@ -589,22 +589,21 @@ void SystemInit (void)
 
     SYSCTL->RCC  = (RCC_Val  | (1UL<<11) | (1UL<<13)) & ~(1UL<<22); /* set value with BYPASS, PWRDN set, USESYSDIV reset */
     SYSCTL->RCC2 = (RCC2_Val | (1UL<<11) | (1UL<<13));              /* set value with BYPASS, PWRDN set */
-    for (i = 0; i < 1000; i++);   /* wait a while */
+    //for (i = 0; i < 1000; i++);   /* wait a while */
 
     SYSCTL->RCC  = (RCC_Val  | (1UL<<11)) & ~(1UL<<22);             /* set value with BYPASS, USESYSDIV reset */
     SYSCTL->RCC2 = (RCC2_Val | (1UL<<11));                          /* set value with BYPASS */
-    for (i = 0; i < 1000; i++);   /* wait a while */
+    //for (i = 0; i < 1000; i++);   /* wait a while */
 
     SYSCTL->RCC  = (RCC_Val  | (1<<11));                            /* set value with BYPASS */
 
-    if ( (((RCC_Val  & (1UL<<13)) == 0) && ((RCC2_Val & (1UL<<31)) == 0)) ||
+    /*if ( (((RCC_Val  & (1UL<<13)) == 0) && ((RCC2_Val & (1UL<<31)) == 0)) ||
          (((RCC2_Val & (1UL<<13)) == 0) && ((RCC2_Val & (1UL<<31)) != 0))   ) {
-      while ((SYSCTL->RIS & (1UL<<6)) != (1UL<<6));                 /* wait until PLL is locked */
-    }
-
+      while ((SYSCTL->RIS & (1UL<<6)) != (1UL<<6));                 wait until PLL is locked 
+    }*/
     SYSCTL->RCC  = (RCC_Val);                                       /* set value */
     SYSCTL->RCC2 = (RCC2_Val);                                      /* set value */
-    for (i = 0; i < 10000; i++);   /* wait a while */
+    //for (i = 0; i < 10000; i++);   /* wait a while */
 
 #endif
 }

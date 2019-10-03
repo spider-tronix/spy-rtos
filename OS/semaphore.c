@@ -15,9 +15,13 @@ void os_sem_wait(struct semaphore *sem)
 	if(sem->sem_count < 0)
 	{
 		os_block(sem);
+		os_end_critical();
+	  os_scheduler();
 	}
-	os_end_critical();
-	os_scheduler();
+	else
+	{
+		os_end_critical();
+	}
 }
 
 void os_sem_signal(struct semaphore *sem)
@@ -27,9 +31,13 @@ void os_sem_signal(struct semaphore *sem)
 	if(sem->sem_count <= 0)
 	{
 		os_release(sem);
+		os_end_critical();
+	  os_scheduler();
 	}
-	os_end_critical();
-	os_scheduler();
+	else
+	{
+		os_end_critical();
+	}
 }
 
 void os_block(struct semaphore *sem)

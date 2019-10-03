@@ -28,5 +28,3 @@ void os_task_create(struct tcb *temp_tcb,void(*fun_ptr)(void *args),void *args,u
 	  os_end_critical();
 	}
 }
-
-	

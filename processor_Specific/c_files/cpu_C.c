@@ -1,5 +1,4 @@
 #include <OS/tasks.h>
-#include <OS/Queues.h>
 #include <OS/os.h>
 
 void os_stack_init(uint32_t **stack_base,void(*fun_ptr)(void *args),void *args)

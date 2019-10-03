@@ -10,6 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -451,11 +452,6 @@
         <Group>
           <GroupName>User Functions</GroupName>
           <Files>
-            <File>
-              <FileName>user_func.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User Functions\user_func.c</FilePath>
-            </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>

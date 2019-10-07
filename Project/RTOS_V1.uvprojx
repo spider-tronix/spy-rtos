@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\spy-rtos\include</IncludePath>
+              <IncludePath>..\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

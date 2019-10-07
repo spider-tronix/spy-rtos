@@ -47,7 +47,7 @@ void os_task_delete(uint32_t priority)
 	//scheduler switching prevention (lock nesting)??
 	os_end_critical();
 	os_dummy();
-	//asm { NOP } // os_dummy
+
 	os_start_critical();
 	os_tcb_lut[priority] = (void *)0;
 	
@@ -66,4 +66,21 @@ void os_task_delete(uint32_t priority)
 	
 	os_end_critical();
 	os_scheduler();
+}
+
+void os_swap_priority(uint32_t prior1, uint32_t prior2)
+{
+	
+	struct tcb *temp_tcb;
+	temp_tcb = os_tcb_lut[prior1];
+	temp_tcb->priority = prior2;
+	temp_tcb = os_tcb_lut[prior2];
+	temp_tcb->priority = prior1;
+	
+	uint32_t temp = os_tcb_lut[prior1];
+	os_tcb_lut[prior1] = os_tcb_lut[prior2];
+	os_tcb_lut[prior2] = temp ;
+	
+	
+	
 }

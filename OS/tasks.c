@@ -4,6 +4,9 @@
 uint32_t os_ready_list[2];
 struct tcb* os_tcb_lut[64];
 
+uint8_t stack_free_list;
+uint32_t *stack_base[8];
+
 void os_task_create(struct tcb *temp_tcb,void(*fun_ptr)(void *args),void *args,uint32_t *stack_base,uint32_t stack_size,uint32_t priority)
 {
 	os_stack_init(&stack_base,fun_ptr,args);//stack intialized before tcb intialization.
@@ -40,14 +43,12 @@ void os_task_delete(uint32_t priority)
 	{
 		os_remove_ready_list(temp_tcb);
 	}
-	//temp_tcb -> delay = 0; ? 
 	temp_tcb -> task_state = READY;
 	//scheduler switching prevention (lock nesting)??
 	os_end_critical();
-	asm { NOP } // os_dummy
+	os_dummy();
+	//asm { NOP } // os_dummy
 	os_start_critical();
-	//locking nesting - ?
-	//delete task hook ?
 	os_tcb_lut[priority] = (void *)0;
 	
 	/*
@@ -62,8 +63,6 @@ void os_task_delete(uint32_t priority)
 		temp_tcb -> prev_tcb -> next_tcb = temp_tcb -> next_tcb;
 	}	
 	*/
-	//temp_tcb -> next_tcb = freelist ??
-	//freelist = temp_tcb ?? 
 	
 	os_end_critical();
 	os_scheduler();

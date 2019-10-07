@@ -11,6 +11,10 @@
 #define BLOCKED 3
 extern uint32_t os_ready_list[2];
 extern struct tcb* os_tcb_lut[64];
+
+extern uint8_t stack_free_list;
+extern uint32_t *stack_base[8];
+
 struct tcb
 {
 	uint32_t *stack_base;

@@ -29,8 +29,6 @@ extern void os_sem_wait(struct semaphore *sem);
 extern void os_sem_signal(struct semaphore *sem);
 extern void os_block(struct semaphore *sem);
 extern void os_release(struct semaphore *sem);
-extern void os_sem_delete(struct semaphore *sem);
-//extern void os_mutex_create();
 extern struct sem_data *os_delete_semqueue(struct semaphore *sem);
 extern void os_add_semqueue(struct semaphore *sem, struct sem_data *temp);
 extern uint8_t os_sched_state;

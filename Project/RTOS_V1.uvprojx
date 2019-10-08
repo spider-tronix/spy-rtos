@@ -392,6 +392,11 @@
               <FileType>5</FileType>
               <FilePath>..\include\OS\tasks.h</FilePath>
             </File>
+            <File>
+              <FileName>os_cpu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\include\OS\os_cpu.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

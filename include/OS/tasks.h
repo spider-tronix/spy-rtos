@@ -8,7 +8,7 @@
 #define READY 0
 #define WAITING 1
 #define RUNNING 2
-#define BLOCKED 3
+#define DELETED 3
 extern uint32_t os_ready_list[2];
 extern struct tcb* os_tcb_lut[64];
 struct tcb

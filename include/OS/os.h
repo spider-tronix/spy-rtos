@@ -1,6 +1,7 @@
 #ifndef OS_H
 #define OS_H
 #include <OS/tasks.h>
+#include <OS/os_cpu.h>
 struct sem_data
 {
 	struct tcb *tcb_ptr;
@@ -44,7 +45,5 @@ extern uint8_t os_leading_zeros(uint32_t);
 extern uint8_t os_get_highest_priority(void);
 extern void os_add_ready_list(struct tcb *temp);
 extern void os_remove_ready_list(struct tcb *temp);
-extern void os_start_critical(void);
-extern void os_end_critical(void);
 extern void os_start(void);
 #endif

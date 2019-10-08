@@ -2,15 +2,15 @@
 	THUMB
     AREA    |.text|, CODE, READONLY
  
-os_start_critical  PROC
-	 EXPORT  os_start_critical
+int_disable  PROC
+	 EXPORT  int_disable
 		 MRS R0,PRIMASK	       ; Save old status
 		 CPSID I    		       ; mask all(except faults)
 		 BX LR 
          ENDP
 
-os_end_critical  PROC
-	 EXPORT  os_end_critical
+int_enable  PROC
+	 EXPORT  int_enable
 		 MSR PRIMASK,R0
          BX LR 
 		 ENDP

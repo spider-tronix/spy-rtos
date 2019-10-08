@@ -5,6 +5,7 @@ uint32_t os_ready_list[2];
 struct tcb* os_tcb_lut[64];
 void os_task_create(struct tcb *temp_tcb,void(*fun_ptr)(void *args),void *args,uint32_t *stack_base,uint32_t stack_size,uint32_t priority)
 {
+	intr_alloc();
 	temp_tcb->stack_base = stack_base;
 	temp_tcb->task_args = args;
 	temp_tcb->next_tcb = NULL;

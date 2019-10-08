@@ -10,6 +10,7 @@ void os_mutex_create(struct mutex *mut)
 
 void os_mutex_lock(struct mutex *mut)
 {
+	intr_alloc();
 	os_start_critical();
 	if (mut->lock == 1)
 	{
@@ -32,6 +33,7 @@ void os_mutex_lock(struct mutex *mut)
 
 void os_mutex_release(struct mutex *mut)
 {
+	intr_alloc();
 	os_start_critical();
 	if (mut->owner_tcb == current_tcb)
 	{

@@ -10,6 +10,7 @@ void os_sem_create(struct semaphore *sem,uint16_t count)
 
 void os_sem_wait(struct semaphore *sem)
 {
+	intr_alloc();
 	os_start_critical();
 	sem->sem_count--;
 	if(sem->sem_count < 0)
@@ -26,6 +27,7 @@ void os_sem_wait(struct semaphore *sem)
 
 void os_sem_signal(struct semaphore *sem)
 {
+	intr_alloc();
 	os_start_critical();
 	sem->sem_count++;
 	if(sem->sem_count <= 0)

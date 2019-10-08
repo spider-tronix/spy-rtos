@@ -2,6 +2,7 @@
 #include <OS/os.h>
 void os_scheduler()
 {
+	intr_alloc();
 	os_start_critical();
 	os_remove_ready_list(current_tcb);
 	uint8_t high_priority;

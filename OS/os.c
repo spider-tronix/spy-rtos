@@ -15,7 +15,7 @@ void os_init()
   for(i=0;i<63;i++)
 	{
 		
-		os_tcb_lut[i] = NULL;
+		os_tcb_lut[i] = (void *)0;
 	}
 }
 void os_start()

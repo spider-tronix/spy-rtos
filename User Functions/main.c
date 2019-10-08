@@ -10,8 +10,7 @@ void user1(void *args)
 	a = a+1;
 	for(i=0;i<50;i=i+2)
 	a=a+2;
-	os_task_delete(2);
-	//os_scheduler();
+	os_scheduler();
 }
 
 void user2(void *args)
@@ -66,7 +65,7 @@ int main()
 	struct tcb *temp3=&a3;
 	
 	//uint32_t *stack_base1 = &stack1[199];
-	uint32_t priority1 = 1;
+	uint32_t priority1 = 2;
 	void (*user1_pt)(void*) = &user1;
 	os_task_create(temp1,user1_pt,(void*)0,stack_base[0],200,priority1);
 	
@@ -79,7 +78,7 @@ int main()
 	os_task_create(user2_pt,stack_base2_1,100,priority2);
 */
 	//uint32_t *stack_base3 = &stack3[99];
-	uint32_t priority3 = 2;
+	uint32_t priority3 = 3;
 	void (*user3_pt)(void*) = &user3;
 	os_task_create(temp3,user3_pt,(void*)0,stack_base[1],100,priority3);
 	
@@ -87,6 +86,7 @@ int main()
 	uint32_t priority20 = 20;
 	void (*user20_pt)(void*) = &idle;
 	os_task_create(temp2,user20_pt,(void*)0,stack_base[2],200,priority20);
+	#os_change_prio(temp3,1);
 	os_start();
 	return 0;
 }

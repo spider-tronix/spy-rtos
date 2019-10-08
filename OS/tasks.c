@@ -68,19 +68,37 @@ void os_task_delete(uint32_t priority)
 	os_scheduler();
 }
 
-void os_swap_priority(uint32_t prior1, uint32_t prior2)
+void os_change_prio(struct tcb *temp_tcb, uint8_t new_prior)
 {
-	
-	struct tcb *temp_tcb;
-	temp_tcb = os_tcb_lut[prior1];
-	temp_tcb->priority = prior2;
-	temp_tcb = os_tcb_lut[prior2];
-	temp_tcb->priority = prior1;
-	
-	uint32_t temp = os_tcb_lut[prior1];
-	os_tcb_lut[prior1] = os_tcb_lut[prior2];
-	os_tcb_lut[prior2] = temp ;
-	
-	
-	
+	os_start_critical();
+	uint8_t old_prior = temp_tcb->priority; 	
+	if (os_tcb_lut[new_prior] == (void *)0)
+	{
+		os_tcb_lut[old_prior]->priority = new_prior;
+		os_tcb_lut[new_prior] = os_tcb_lut[old_prior];
+		os_tcb_lut[old_prior] = (void *)0;		
+		// assuming the new prior. task ready list is zero
+		if(new_prior <= 31 && old_prior <= 31) 
+		{
+			os_ready_list[0] |= ((os_ready_list[0]&(1<<(31-old_prior)))> 1) << (31-new_prior);
+			os_ready_list[0] &= ~(1<<(31-old_prior));
+		}	
+		else if(new_prior >= 31 && old_prior <= 31)
+		{ 
+			os_ready_list[1] |= ((os_ready_list[0]&(1<<(31-old_prior)))> 1) << (63-new_prior);
+			os_ready_list[0] &= ~(1<<(31-old_prior));
+		}				
+		else if(new_prior <= 31 && old_prior >= 31)
+		{ 
+			os_ready_list[0] |= ((os_ready_list[1]&(1<<(63-old_prior)))> 1) << (31-new_prior);
+			os_ready_list[1] &= ~(1<<(63-old_prior));			
+		}	
+		else
+		{			
+			os_ready_list[1] |= ((os_ready_list[1]&(1<<(63-old_prior)))> 1) << (63-new_prior);
+			os_ready_list[1] &= ~(1<<(63-old_prior));
+		}
+		os_end_critical();
+		os_scheduler();
+	}	
 }

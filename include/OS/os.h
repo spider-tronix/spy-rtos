@@ -23,6 +23,7 @@ struct mutex
 	uint8_t highest_prio;
 	uint8_t lock;
 };
+
 extern void os_sem_create(struct semaphore *sem, uint16_t);
 extern void os_sem_wait(struct semaphore *sem);
 extern void os_sem_signal(struct semaphore *sem);

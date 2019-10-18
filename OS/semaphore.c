@@ -32,6 +32,12 @@ void os_sem_signal(struct semaphore *sem)
 	sem->sem_count++;
 	if(sem->sem_count <= 0)
 	{
+		if(os_int_cntr >0)
+		{
+			os_release(sem);
+		  os_end_critical();
+			return;
+		}
 		os_release(sem);
 		os_end_critical();
 	  os_scheduler();

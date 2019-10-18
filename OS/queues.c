@@ -52,3 +52,40 @@ struct sem_data* os_delete_semqueue(struct semaphore *sem)
 		return temp;
 	}
 }
+
+void os_dly_list_insert(struct tcb *temp,uint32_t time)
+{
+	struct dly_data dly_temp;
+	dly_temp.dly_tcb = temp;
+	dly_temp.remain_time = time;
+	dly_temp.next = NULL;
+	dly_temp.prev = NULL;
+	struct dly_data *dly_list_ptr = os_dly_list_head;
+	if(dly_list_ptr == NULL)
+	{
+		os_dly_list_head = &dly_temp;
+		os_dly_list_tail = &dly_temp;
+	}
+	else
+	{
+	  while(dly_list_ptr !=NULL && dly_temp.remain_time >= dly_list_ptr->remain_time)
+		{
+		  dly_temp.remain_time-=dly_list_ptr->remain_time;
+			dly_list_ptr = dly_list_ptr->next;
+	  }
+		if(dly_list_ptr == NULL)
+		{
+			os_dly_list_tail->next = &dly_temp;
+			dly_temp.prev = os_dly_list_tail;
+			os_dly_list_tail = os_dly_list_tail->next;
+		}
+		else
+		{
+			dly_list_ptr->remain_time-=dly_temp.remain_time;
+			dly_list_ptr->prev->next = &dly_temp;
+			dly_temp.prev = dly_list_ptr->prev;
+			dly_temp.next = dly_list_ptr;
+			dly_list_ptr->prev =&dly_temp;
+		}
+	}
+}

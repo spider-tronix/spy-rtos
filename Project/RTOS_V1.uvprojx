@@ -388,14 +388,14 @@
               <FilePath>..\include\OS\os.h</FilePath>
             </File>
             <File>
-              <FileName>tasks.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\include\OS\tasks.h</FilePath>
-            </File>
-            <File>
               <FileName>os_cpu.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\include\OS\os_cpu.h</FilePath>
+            </File>
+            <File>
+              <FileName>tasks.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\include\OS\tasks.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -432,6 +432,11 @@
               <FileType>1</FileType>
               <FilePath>..\OS\mutex.c</FilePath>
             </File>
+            <File>
+              <FileName>time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\OS\time.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -466,6 +471,21 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User Functions\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\include\drivers\bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\include\drivers\bsp.h</FilePath>
             </File>
           </Files>
         </Group>

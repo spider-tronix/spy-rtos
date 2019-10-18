@@ -21,3 +21,14 @@ void os_stack_init(uint32_t **stack_base,void(*fun_ptr)(void *args),void *args)
 	*(*stack_base-15)=0x14141414;//R4
 	*stack_base = *stack_base-15;
 }
+
+void SysTick_Handler()
+{
+	intr_alloc();
+	os_start_critical();
+	os_int_cntr++;
+	os_clk_cntr++;
+	os_end_critical();
+	os_sem_signal(&os_dly_sem);
+	os_int_sched();
+}

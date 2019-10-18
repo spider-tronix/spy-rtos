@@ -1,15 +1,22 @@
 #include <OS/os.h>
 #include <OS/tasks.h>
+#include <drivers/bsp.h>
 uint8_t os_sched_state;
+uint32_t os_int_cntr;
 struct tcb *current_tcb;
 struct tcb *new_high_tcb;
-
+struct semaphore os_dly_sem;
+struct dly_data *os_dly_list;
 void os_init()
 {
 	int i;
+	bsp_init();
 	os_sched_state = BLOCKED;
   current_tcb = NULL;
   new_high_tcb =NULL;
+	os_int_cntr = 0;
+	os_dly_list_head = NULL;
+	os_dly_list_tail = NULL;
 	os_ready_list[0] = 0 ;
 	os_ready_list[1] = 0 ;
   for(i=0;i<63;i++)

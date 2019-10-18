@@ -6,7 +6,8 @@ uint32_t os_int_cntr;
 struct tcb *current_tcb;
 struct tcb *new_high_tcb;
 struct semaphore os_dly_sem;
-struct dly_data *os_dly_list;
+struct tcb *os_dly_list_head;
+struct tcb *os_dly_list_tail;
 void os_init()
 {
 	int i;

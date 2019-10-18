@@ -32,13 +32,6 @@ struct mutex
 	uint8_t lock;
 };
 
-struct dly_data
-{
-	struct tcb *dly_tcb;
-	struct dly_data *next;
-	struct dly_data	*prev;
-	uint32_t remain_time;
-};
 extern void os_sem_create(struct semaphore *sem, uint16_t);
 extern void os_sem_wait(struct semaphore *sem);
 extern void os_sem_signal(struct semaphore *sem);
@@ -47,11 +40,13 @@ extern void os_release(struct semaphore *sem);
 extern struct sem_data *os_delete_semqueue(struct semaphore *sem);
 extern void os_add_semqueue(struct semaphore *sem, struct sem_data *temp);
 extern void os_dly_list_insert(struct tcb *temp,uint32_t time);
+extern void os_dly_list_remove(struct tcb *temp);
+extern void os_dly_update(void);
 extern uint8_t os_sched_state;
 extern uint32_t os_int_cntr;
 extern uint32_t os_clk_cntr;
-extern struct dly_data *os_dly_list_head;
-extern struct dly_data *os_dly_list_tail;
+extern struct tcb *os_dly_list_head;
+extern struct tcb *os_dly_list_tail;
 extern struct semaphore os_dly_sem;
 extern void os_context_switch(void);
 extern void os_scheduler(void);

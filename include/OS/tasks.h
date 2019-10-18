@@ -17,7 +17,10 @@ struct tcb
 	uint32_t *stack_base;
 	uint32_t *task_args;
 	struct tcb *next_tcb;
-	struct tcb *prev_tcb;     
+	struct tcb *prev_tcb;
+  struct tcb *dly_prev;
+  struct tcb *dly_next;
+  uint32_t remain_time;	
 	uint32_t stack_size;
 	uint32_t program_counter;
 	uint8_t priority;

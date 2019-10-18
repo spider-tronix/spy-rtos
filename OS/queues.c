@@ -55,37 +55,51 @@ struct sem_data* os_delete_semqueue(struct semaphore *sem)
 
 void os_dly_list_insert(struct tcb *temp,uint32_t time)
 {
-	struct dly_data dly_temp;
-	dly_temp.dly_tcb = temp;
-	dly_temp.remain_time = time;
-	dly_temp.next = NULL;
-	dly_temp.prev = NULL;
-	struct dly_data *dly_list_ptr = os_dly_list_head;
+	temp->remain_time = time;
+	temp->dly_next = NULL;
+	temp->dly_prev = NULL;
+	struct tcb *dly_list_ptr = os_dly_list_head;
 	if(dly_list_ptr == NULL)
 	{
-		os_dly_list_head = &dly_temp;
-		os_dly_list_tail = &dly_temp;
+		os_dly_list_head = temp;
+		os_dly_list_tail = temp;
 	}
 	else
 	{
-	  while(dly_list_ptr !=NULL && dly_temp.remain_time >= dly_list_ptr->remain_time)
+	  while(dly_list_ptr !=NULL && temp->remain_time >= dly_list_ptr->remain_time)
 		{
-		  dly_temp.remain_time-=dly_list_ptr->remain_time;
-			dly_list_ptr = dly_list_ptr->next;
+		  temp->remain_time-=dly_list_ptr->remain_time;
+			dly_list_ptr = dly_list_ptr->dly_next;
 	  }
 		if(dly_list_ptr == NULL)
 		{
-			os_dly_list_tail->next = &dly_temp;
-			dly_temp.prev = os_dly_list_tail;
-			os_dly_list_tail = os_dly_list_tail->next;
+			os_dly_list_tail->dly_next = temp;
+			temp->dly_prev = os_dly_list_tail;
+			os_dly_list_tail = os_dly_list_tail->dly_next;
 		}
 		else
 		{
-			dly_list_ptr->remain_time-=dly_temp.remain_time;
-			dly_list_ptr->prev->next = &dly_temp;
-			dly_temp.prev = dly_list_ptr->prev;
-			dly_temp.next = dly_list_ptr;
-			dly_list_ptr->prev =&dly_temp;
+			dly_list_ptr->remain_time-=temp->remain_time;
+			dly_list_ptr->dly_prev->dly_next = temp;
+			temp->dly_prev = dly_list_ptr->dly_prev;
+			temp->dly_next = dly_list_ptr;
+			dly_list_ptr->dly_prev = temp;
 		}
 	}
+}
+
+void os_dly_list_remove(struct tcb *temp)
+{
+	if(temp->dly_next == NULL)
+	{
+		os_dly_list_head = NULL;
+		os_dly_list_tail = NULL;
+	}
+	else
+	{
+	  os_dly_list_head = temp->dly_next;
+	  os_dly_list_head->dly_prev = NULL;
+	  temp->dly_next = NULL;
+	}
+	os_add_ready_list(temp);
 }

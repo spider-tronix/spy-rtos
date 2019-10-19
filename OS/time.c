@@ -6,7 +6,7 @@ inline void os_time_dly(uint32_t ticks)
 	os_dly_list_insert(current_tcb,ticks);
 }
 
-void os_dly_update()
+void os_dly_update(void *args)
 {
 	struct tcb *dly_list_ptr;
 	intr_alloc();

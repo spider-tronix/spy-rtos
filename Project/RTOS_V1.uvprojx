@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>D:\RTOS_v2\include</IncludePath>
+              <IncludePath>..\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

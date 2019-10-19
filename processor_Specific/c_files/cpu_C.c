@@ -29,6 +29,9 @@ void SysTick_Handler()
 	os_int_cntr++;
 	os_clk_cntr++;
 	os_end_critical();
-	os_sem_signal(&os_dly_sem);
+	if(os_dly_list_head !=NULL)
+	{
+   	os_sem_signal(&os_dly_sem);
+	}
 	os_int_sched();
 }

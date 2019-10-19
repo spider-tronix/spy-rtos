@@ -3,6 +3,9 @@
 #include <drivers/bsp.h>
 uint8_t os_sched_state;
 uint32_t os_int_cntr;
+uint32_t os_clk_cntr;
+struct tcb os_dly_tcb;
+uint32_t os_dly_stack[200];
 struct tcb *current_tcb;
 struct tcb *new_high_tcb;
 struct semaphore os_dly_sem;
@@ -16,10 +19,14 @@ void os_init()
   current_tcb = NULL;
   new_high_tcb =NULL;
 	os_int_cntr = 0;
+	os_clk_cntr = 0;
+	os_task_create(&os_dly_tcb,&os_dly_update,(void*)0,&os_dly_stack[199],200,4);
 	os_dly_list_head = NULL;
 	os_dly_list_tail = NULL;
 	os_ready_list[0] = 0 ;
 	os_ready_list[1] = 0 ;
+	os_sem_create(&os_dly_sem,0);
+	
   for(i=0;i<63;i++)
 	{
 		

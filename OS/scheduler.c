@@ -4,7 +4,6 @@ void os_scheduler()
 {
 	intr_alloc();
 	os_start_critical();
-	os_remove_ready_list(current_tcb);
 	uint8_t high_priority;
 	high_priority= os_get_highest_priority();
 	new_high_tcb=os_tcb_lut[high_priority];
@@ -19,5 +18,24 @@ void os_scheduler()
 	}
 	new_high_tcb->task_state = RUNNING;
 	os_context_switch();
+	os_end_critical();
+}
+
+void os_int_scheduler()
+{
+	intr_alloc();
+	os_start_critical();
+	if(os_int_cntr > 1)
+	{
+		return;
+	}
+	new_high_tcb = os_tcb_lut[os_get_highest_priority()];
+  if(current_tcb->task_state == RUNNING)
+	{
+		current_tcb->task_state = READY;
+	}
+	new_high_tcb->task_state = RUNNING;
+	os_context_switch();
+	os_int_cntr--;
 	os_end_critical();
 }

@@ -4,6 +4,7 @@
 inline void os_time_dly(uint32_t ticks)
 {
 	os_dly_list_insert(current_tcb,ticks);
+	os_scheduler();
 }
 
 void os_dly_update(void *args)

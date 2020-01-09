@@ -86,6 +86,8 @@ void os_dly_list_insert(struct tcb *temp,uint32_t time)
 			dly_list_ptr->dly_prev = temp;
 		}
 	}
+	temp->task_state=WAITING;
+	os_remove_ready_list(temp);
 }
 
 void os_dly_list_remove(struct tcb *temp)

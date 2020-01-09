@@ -16,7 +16,7 @@ void os_sem_wait(struct semaphore *sem)
 	sem->sem_count--;
 	if(sem->sem_count < 0)
 	{
-		os_block(sem,&sem_block);
+		os_sem_block(sem,&sem_block);
 		os_end_critical();
 	  os_scheduler();
 	}
@@ -49,7 +49,7 @@ void os_sem_signal(struct semaphore *sem)
 	}
 }
 
-void os_block(struct semaphore *sem,struct sem_data *sem_block)
+void os_sem_block(struct semaphore *sem,struct sem_data *sem_block)
 {
 	sem_block->tcb_ptr = current_tcb;
 	sem_block->next = NULL;

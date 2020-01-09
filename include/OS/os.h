@@ -9,13 +9,6 @@ struct sem_data
 	struct sem_data *prev;
 };
 
-struct queue_data
-{
-	
-	struct sem_data *mut_ptr_head;
-	struct sem_data *mut_ptr_tail;
-};
-
 struct semaphore
 {
 	struct sem_data *sem_ptr_head;
@@ -35,7 +28,7 @@ struct mutex
 extern void os_sem_create(struct semaphore *sem, uint16_t);
 extern void os_sem_wait(struct semaphore *sem);
 extern void os_sem_signal(struct semaphore *sem);
-extern void os_block(struct queue_data *sem);
+extern void os_sem_block(struct semaphore *, struct sem_data *);
 extern void os_release(struct semaphore *sem);
 extern struct sem_data *os_delete_semqueue(struct semaphore *sem);
 extern void os_add_semqueue(struct semaphore *sem, struct sem_data *temp);
@@ -62,4 +55,5 @@ extern uint8_t os_get_highest_priority(void);
 extern void os_add_ready_list(struct tcb *temp);
 extern void os_remove_ready_list(struct tcb *temp);
 extern void os_start(void);
+extern inline void os_time_dly(uint32_t);
 #endif

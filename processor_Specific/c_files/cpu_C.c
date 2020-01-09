@@ -26,6 +26,10 @@ void SysTick_Handler()
 {
 	intr_alloc();
 	os_start_critical();
+	if(os_sched_state == BLOCKED)
+	{
+		return;
+	}
 	os_int_cntr++;
 	os_clk_cntr++;
 	os_end_critical();
@@ -33,5 +37,5 @@ void SysTick_Handler()
 	{
    	os_sem_signal(&os_dly_sem);
 	}
-	os_int_sched();
+	os_int_scheduler();
 }

@@ -1,7 +1,7 @@
 #include <OS/tasks.h>
 #include <OS/os.h>
 void os_scheduler()
-{
+{ 
 	intr_alloc();
 	os_start_critical();
 	uint8_t high_priority;

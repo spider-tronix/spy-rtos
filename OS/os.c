@@ -20,7 +20,6 @@ void os_init()
   new_high_tcb =NULL;
 	os_int_cntr = 0;
 	os_clk_cntr = 0;
-	os_task_create(&os_dly_tcb,&os_dly_update,(void*)0,&os_dly_stack[199],200,4);
 	os_dly_list_head = NULL;
 	os_dly_list_tail = NULL;
 	os_ready_list[0] = 0 ;
@@ -32,6 +31,7 @@ void os_init()
 		
 		os_tcb_lut[i] = NULL;
 	}
+	os_task_create(&os_dly_tcb,&os_dly_update,(void*)0,&os_dly_stack[199],200,1);
 }
 void os_start()
 {

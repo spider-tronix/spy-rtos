@@ -428,11 +428,6 @@
               <FilePath>..\OS\queues.c</FilePath>
             </File>
             <File>
-              <FileName>mutex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\OS\mutex.c</FilePath>
-            </File>
-            <File>
               <FileName>time.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\OS\time.c</FilePath>

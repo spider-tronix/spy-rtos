@@ -65,16 +65,4 @@ uint8_t os_get_highest_priority()
 	}
 }
 	
-void os_mutex_create(struct mutex *temp,uint8_t l_prio)
-{
-	if(l_prio<os_lowest_prio)
-	{
-		os_start_critical();
-		temp->lock = 1;
-		os_end_critical();
-		temp->lowest_prio = l_prio;
-		temp->mut_ptr_head = NULL;
-		temp->mut_ptr_tail = NULL;
-		temp->owner_tcb = NULL;
-	}	
-}
+

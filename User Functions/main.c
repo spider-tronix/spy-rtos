@@ -86,7 +86,7 @@ int main()
 	uint32_t priority20 = 20;
 	void (*user20_pt)(void*) = &idle;
 	os_task_create(temp2,user20_pt,(void*)0,stack_base[2],200,priority20);
-	#os_change_prio(temp3,1);
+	//os_change_prio(temp3,1);
 	os_start();
 	return 0;
 }

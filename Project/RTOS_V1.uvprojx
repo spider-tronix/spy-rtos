@@ -422,6 +422,11 @@
               <FileType>1</FileType>
               <FilePath>..\OS\queues.c</FilePath>
             </File>
+            <File>
+              <FileName>mutex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\mutex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

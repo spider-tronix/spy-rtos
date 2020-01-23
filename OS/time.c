@@ -3,7 +3,10 @@
 
 inline void os_time_dly(uint32_t ticks)
 {
+	intr_alloc();
+	os_start_critical();
 	os_dly_list_insert(current_tcb,ticks);
+	os_end_critical();
 	os_scheduler();
 }
 
@@ -30,6 +33,7 @@ void os_dly_update(void *args)
 				dly_list_ptr=dly_list_ptr->dly_next;
 			}
 		}
-    os_end_critical();		
+    os_end_critical();
+    os_scheduler();		
 	}
 }

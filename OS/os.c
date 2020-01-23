@@ -31,7 +31,7 @@ void os_init()
 		
 		os_tcb_lut[i] = NULL;
 	}
-	os_task_create(&os_dly_tcb,&os_dly_update,(void*)0,&os_dly_stack[199],200,1);
+	os_task_create(&os_dly_tcb,&os_dly_update,(void*)0,&os_dly_stack[199],200,3);
 }
 void os_start()
 {

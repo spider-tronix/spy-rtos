@@ -27,7 +27,8 @@ void SysTick_Handler()
 	intr_alloc();
 	os_start_critical();
 	if(os_sched_state == BLOCKED)
-	{
+	{ 
+		os_end_critical();
 		return;
 	}
 	os_int_cntr++;

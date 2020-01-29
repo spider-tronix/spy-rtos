@@ -25,7 +25,7 @@ void os_mutex_wait(struct mutex *mut)
 	}
 	else
 	{
-		os_block(mut); // need to fixed
+		os_block(mut); // need to fixed This function should called at the end coz after this scheduler will be called and the remaining lines wont get executes
 		if (current_tcb->priority < mut->owner_tcb->priority) // PIP implemented -ok
 		{		
 			os_change_prio(mut->owner_tcb, current_tcb->priority);

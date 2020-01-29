@@ -21,9 +21,8 @@ struct mutex
 	struct tcb *owner_tcb;
 	struct sem_data *mut_ptr_head;
 	struct sem_data *mut_ptr_tail;
-	uint8_t highest_prio;
 	uint8_t old_prio;
-	uint8_t lock;
+	_Bool lock;
 };
 
 extern void os_sem_create(struct semaphore *sem, uint16_t);
@@ -32,7 +31,7 @@ extern void os_sem_signal(struct semaphore *sem);
 extern void os_block(struct semaphore *sem);
 extern void os_release(struct semaphore *sem);
 extern void os_sem_delete(struct semaphore *sem);
-extern void os_mutex_create(struct mutex *mut,uint8_t high_prio);
+extern void os_mutex_create(struct mutex *mut);
 extern void os_mutex_signal(struct mutex *mut);
 extern void os_mutex_wait(struct mutex *mut);
 extern struct sem_data *os_delete_semqueue(struct semaphore *sem);

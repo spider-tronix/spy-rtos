@@ -1,7 +1,7 @@
 #include <OS/tasks.h>
 #include <OS/os.h>
 
-void os_mutex_create(struct mutex *mutex,uint8_t high_prio)
+void os_mutex_create(struct mutex *mut,uint8_t high_prio)
 {
 
 		os_start_critical();
@@ -37,12 +37,15 @@ void os_mutex_wait(struct mutex *mut)
 
 void os_mutex_signal(struct mutex *mut)
 {
-    os_start_critical();
-    if(mut->owner_tcb == current_tcb)
-    {
-        mut->lock=0;
-        os_change_prio(mut->owner_tcb, mut->old_prio);
-        mut->pip = NULL;
-    }
-    os_end_critical();
+	os_start_critical();
+	if(mut->owner_tcb == current_tcb)
+	{
+		mut->lock=0;
+		if(mut->old_prio!=NULL)
+		{
+			os_change_prio(mut->owner_tcb, mut->old_prio);
+			mut->old_prio = NULL;
+		}
+	}
+	os_end_critical();
 }

@@ -5,8 +5,8 @@ void os_mutex_create(struct mutex *mut)
 {
 
 		os_start_critical();
-		mut->lock = 1;// 1 -> indicates resource available
-		os_end_critical();
+		mut->lock = 1;// 1 -> indicates resource available - ok
+		os_end_critical(); // extend the critical section till the end of the function
 		mut->old_prio = NULL;
 		mut->mut_ptr_head = NULL;
 		mut->mut_ptr_tail = NULL;
@@ -20,13 +20,13 @@ void os_mutex_wait(struct mutex *mut)
 	{
 		mut->lock = 0; // locked
 		mut->owner_tcb = current_tcb;
-		mut->old_prio = mut->owner_tcb->priority;// logic problem fixed
+		mut->old_prio = mut->owner_tcb->priority;// logic problem fixed - ok
 		os_end_critical();	
 	}
 	else
 	{
 		os_block(mut); // need to fixed
-		if (current_tcb->priority < mut->owner_tcb->priority) // PIP implemented
+		if (current_tcb->priority < mut->owner_tcb->priority) // PIP implemented -ok
 		{		
 			os_change_prio(mut->owner_tcb, current_tcb->priority);
 		}
@@ -41,6 +41,7 @@ void os_mutex_signal(struct mutex *mut)
 	{
 		mut->lock=1;
 		os_change_prio(mut->owner_tcb, mut->old_prio);
+		// add a function to release a task from mutex waitlist
 	}
 	os_end_critical();
 }

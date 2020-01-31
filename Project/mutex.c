@@ -44,4 +44,5 @@ void os_mutex_signal(struct mutex *mut)
 		os_release(mut);
 	}
 	os_end_critical();
+	os_scheduler();
 }

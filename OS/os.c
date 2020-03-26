@@ -16,8 +16,8 @@ void os_init()
 	int i;
 	bsp_init();
 	os_sched_state = BLOCKED;
-  current_tcb = NULL;
-  new_high_tcb =NULL;
+    current_tcb = NULL;
+    new_high_tcb =NULL;
 	os_int_cntr = 0;
 	os_clk_cntr = 0;
 	os_dly_list_head = NULL;
@@ -26,9 +26,8 @@ void os_init()
 	os_ready_list[1] = 0 ;
 	os_sem_create(&os_dly_sem,0);
 	
-  for(i=0;i<63;i++)
+    for(i=0;i<63;i++)
 	{
-		
 		os_tcb_lut[i] = NULL;
 	}
 	os_task_create(&os_dly_tcb,&os_dly_update,(void*)0,&os_dly_stack[199],200,3);

@@ -3,7 +3,6 @@
 
 void os_mutex_create(struct mutex *mut)
 {
-
 		os_start_critical();
 		mut->lock = 1;// 1 -> indicates resource available - ok
 		os_end_critical(); // extend the critical section till the end of the function

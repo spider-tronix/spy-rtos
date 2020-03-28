@@ -9,6 +9,8 @@ This project involves development of Real Time kernel for ARM Cortex M4 based pr
 * Synchronization primitives like Semaphore, Mutex has been incorporated. 
 * Bulit a Ping Pong Game in Nokia 5110 LCD to show multi-tasking efficiency.
 
+<img src="image/spyrtos.jpg" width="40%">
+
 **Team**
 
 * Abishek KR (https://github.com/Abishek0398)

@@ -1,6 +1,7 @@
 #ifndef OS_CPU
 #define OS_CPU
 #include <OS/tasks.h>
+#include <drivers/bsp.h>
 extern uint32_t int_disable(void);
 extern void int_enable(uint32_t);
 extern void SysTick_Handler(void);

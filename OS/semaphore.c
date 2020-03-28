@@ -18,7 +18,7 @@ void os_sem_wait(struct semaphore *sem)
 	{
 		os_sem_block(sem,&sem_block);
 		os_end_critical();
-	    os_scheduler();
+	  os_scheduler();
 	}
 	else
 	{
@@ -36,12 +36,12 @@ void os_sem_signal(struct semaphore *sem)
 		if(os_int_cntr >0)
 		{
 			os_release(sem);
-		    os_end_critical();
+		  os_end_critical();
 			return;
 		}
 		os_release(sem);
 		os_end_critical();
-	    os_scheduler();
+	  os_scheduler();
 	}
 	else
 	{
@@ -61,5 +61,5 @@ void os_sem_block(struct semaphore *sem,struct sem_data *sem_block)
 
 void os_release(struct semaphore *sem)
 {
-	os_add_ready_list(os_delete_semqueue(sem)->tcb_ptr);
+	os_add_ready(os_delete_semqueue(sem)->tcb_ptr);
 }

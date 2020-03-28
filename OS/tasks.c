@@ -18,7 +18,7 @@ void os_task_create(struct tcb *temp_tcb,void(*fun_ptr)(void *args),void *args,u
 	temp_tcb->del_req = 0;
 	os_stack_init(&temp_tcb->stack_base,fun_ptr,args);
 	os_start_critical();
-	os_add_ready_list(temp_tcb);
+	os_add_ready(temp_tcb);
 	if(os_sched_state == RUNNING)
 	{
 		os_scheduler();

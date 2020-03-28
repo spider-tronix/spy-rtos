@@ -53,7 +53,7 @@ struct sem_data* os_delete_semqueue(struct semaphore *sem)
 	}
 }
 
-void os_dly_list_insert(struct tcb *temp,uint32_t time)
+void os_dly_list_insert(struct tcb *temp,int32_t time)
 {
 	temp->remain_time = time;
 	temp->dly_next = NULL;
@@ -66,11 +66,11 @@ void os_dly_list_insert(struct tcb *temp,uint32_t time)
 	}
 	else
 	{
-	  	while(dly_list_ptr !=NULL && temp->remain_time >= dly_list_ptr->remain_time)
-	  	{
-		    temp->remain_time-=dly_list_ptr->remain_time;
+	  while(dly_list_ptr !=NULL && temp->remain_time >= dly_list_ptr->remain_time)
+		{
+		  temp->remain_time -= dly_list_ptr->remain_time;
 			dly_list_ptr = dly_list_ptr->dly_next;
-	  	}
+	  }
 		if(dly_list_ptr == NULL)
 		{
 			os_dly_list_tail->dly_next = temp;
@@ -98,7 +98,7 @@ void os_dly_list_insert(struct tcb *temp,uint32_t time)
 }
 
 void os_dly_list_remove(struct tcb *temp)
-{
+ { 
 	if(temp->dly_next == NULL)
 	{
 		os_dly_list_head = NULL;
@@ -109,7 +109,7 @@ void os_dly_list_remove(struct tcb *temp)
 	  os_dly_list_head = temp->dly_next;
 	  os_dly_list_head->dly_prev = NULL;
 	  temp->dly_next = NULL;
-	  temp->dly_prev = NULL;
+		temp->dly_prev = NULL;
 	}
-	os_add_ready_list(temp);
+	os_add_ready(temp);
 }

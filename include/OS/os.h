@@ -2,6 +2,7 @@
 #define OS_H
 #include <OS/tasks.h>
 #include <OS/os_cpu.h>
+
 struct sem_data
 {
 	struct tcb *tcb_ptr;
@@ -32,7 +33,7 @@ extern void os_sem_block(struct semaphore *, struct sem_data *);
 extern void os_release(struct semaphore *sem);
 extern struct sem_data *os_delete_semqueue(struct semaphore *sem);
 extern void os_add_semqueue(struct semaphore *sem, struct sem_data *temp);
-extern void os_dly_list_insert(struct tcb *temp,uint32_t time);
+extern void os_dly_list_insert(struct tcb *temp,int32_t time);
 extern void os_dly_list_remove(struct tcb *temp);
 extern void os_dly_update(void*);
 extern void os_int_scheduler(void);
@@ -52,8 +53,8 @@ extern struct tcb *new_high_tcb;
 extern struct tcb *current_tcb;
 extern uint8_t os_leading_zeros(uint32_t);
 extern uint8_t os_get_highest_priority(void);
-extern void os_add_ready_list(struct tcb *temp);
+extern void os_add_ready(struct tcb *temp);
 extern void os_remove_ready_list(struct tcb *temp);
 extern void os_start(void);
-extern inline void os_time_dly(uint32_t);
+extern inline void os_time_dly(int32_t);
 #endif

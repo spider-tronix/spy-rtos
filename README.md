@@ -11,6 +11,6 @@ This project involves development of Real Time kernel for ARM Cortex M4 based pr
 
 **Team**
 
-1) Abishek KR (https://github.com/Abishek0398)
-2) Abishek R  (https://github.com/abishek27)
-3) Venkatesh TK (https://github.com/VenkateshTK)
+* Abishek KR (https://github.com/Abishek0398)
+* Abishek R  (https://github.com/abishek27)
+* Venkatesh TK (https://github.com/VenkateshTK)
